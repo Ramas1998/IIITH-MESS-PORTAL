@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Homepage</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="lightpick.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+.collapsible {
+  background-color: #1abc9c;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #1abc9d;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+</style>
+</head>
+
+<body onload="make_table(),rate(),showpic()">
+{% include 'header.html'%}
+<div>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+      <br>
+      <div style=" height:100%;">
+        
+        {% include 'left_sidebar.html'%}
+      </div>
+  </div>
+<div style="float:left;width:73%;height:40%; padding: 0px 10px 0px 10px;border-radius: 10px">
+<b><center><h1>Billing </h1></center></b><br><br>
+<button class="collapsible"><b>Default Mess Bill Rates</b></button>
+<div class="content">
+  <br>
+
+  <table class='rate'>
+  </table>
+  <br>
+</div>
+  <br>
+<button class="collapsible"><b>Mess Bill</b></button>
+<div class="content">
+  <br>
+  <table class="data">
+  </table>
+  <br>
+</div>
+<br>
+</div>
+</div>
+<br>
+<br><br>
+
+<script  src="/static/js/home.js"></script>
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+<script src="lightpick.js"></script>
+<script>
+    
+    new Lightpick({
+    field: document.getElementById('demo'),
+    lang: 'en',
+    numberOfMonths:2,
+    numberOfColumns: 3,
+    singleDate: false,
+    }
+);
+</script>
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+
+function make_table()
+{   
+    var msg = '{{message}}';
+    msg=msg.replace(/&#34;/g,'"');
+    var data = JSON.parse(msg);
+    var cancel = '{{canc}}';
+    cancel=cancel.replace(/&#34;/g,'"');
+    var canc = JSON.parse(cancel);
+    month=['South Mess','North Mess','Yuktahar Mess','Kadamb-Veg Mess','Kadamb-Non-Veg Mess','Meals Cancelled','Cancellations allowed'];
+    var table = document.getElementsByClassName("data");
+    var tr = document.createElement("tr");
+    var td = document.createElement("th");
+    td.appendChild(document.createTextNode("Month"));
+    tr.appendChild(td);
+    for(i=0;i<7;i++)
+    { 
+      td = document.createElement("th");
+      td.appendChild(document.createTextNode(month[i]));
+      td.appendChild(document.createElement("br"));
+      td.appendChild(document.createTextNode("B L D"));
+      tr.appendChild(td);
+    }
+    td = document.createElement("th");
+    td.appendChild(document.createTextNode("Total Bill"));
+    tr.appendChild(td);
+    table[0].appendChild(tr);
+    month=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    for(j=6;j<18;j++)
+    { 
+      var ind = j%12
+      var tr = document.createElement("tr");
+      var td = document.createElement("td");
+      td.appendChild(document.createTextNode(month[ind]+" "+data[ind][2]));
+      tr.appendChild(td);
+      for(i=3;i<=18;i+=3)
+      { 
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(data[ind][i]+" "+data[ind][i+1]+" "+data[ind][i+2]));
+        tr.appendChild(td);
+      }
+      var td = document.createElement("td");
+      td.appendChild(document.createTextNode(canc[ind][1]+" "+canc[ind][2]+" "+canc[ind][3]));
+      tr.appendChild(td);
+      var td = document.createElement("td");
+      td.appendChild(document.createTextNode("\u20B9 " + data[ind][21].toString()));
+      tr.appendChild(td);
+      table[0].appendChild(tr);
+    }
+}
+
+function rate()
+{ 
+  var rate = '{{rate}}';
+  rate=rate.replace(/&#34;/g,'"');
+  rate = JSON.parse(rate);
+  console.log(rate);
+  var table = document.getElementsByClassName("rate");
+    var tr = document.createElement("tr");
+    head = ['Mess Name', 'From Date', 'Breakfast Rate', 'Lunch Rate', 'Dinner Rate']
+    for(i=0;i<5;i++)
+    { var td = document.createElement("th");
+      td.appendChild(document.createTextNode(head[i]));
+      tr.appendChild(td);
+    }
+    table[0].appendChild(tr);
+    console.log(rate['South']);
+    mess = ['South','North','Yuktahar','Kadamb Veg','Kadamb Non-Veg']
+    mess1 = ['South','North','Yuktahar','Kadamb-V','Kadamb-NV']
+    for(j=0;j<5;j++)
+    { 
+      var tr = document.createElement("tr");
+      var td = document.createElement("td");
+      td.appendChild(document.createTextNode(mess[j]));
+      tr.appendChild(td);
+      var td = document.createElement("td");
+      td.appendChild(document.createTextNode('1st Jan 2018'));
+      tr.appendChild(td);
+      for(i=0;i<3;i++)
+      { 
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(rate[mess1[j]][i+1]));
+        tr.appendChild(td);
+      }
+      table[0].appendChild(tr);
+    }
+}
+</script>

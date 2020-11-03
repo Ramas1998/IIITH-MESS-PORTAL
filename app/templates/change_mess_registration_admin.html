@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Homepage</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="lightpick.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+ 
+<style>
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+</style>
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+<body>
+
+<nav class="navbar" style="background:#1abc9c ;color:white;">
+  <div class="container-fluid" >
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Home</a>
+    </div>  
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Cancel Next Meal</a>
+    </div>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span id="username" class="glyphicon glyphicon-user"></span></a></li>
+      <li><a id="btnLogout" href="../"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+<div>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+      <br>
+      <div style=" height:100%;">
+        
+        <button  style="width:100%;margin-top: 0px" type="button" class="btn btn-primary">View Mess Registration</button><br>
+        <button style="width:100%;margin-top: 10px"type="button" class="btn btn-success">Cancel Meals</button><br>
+        <button style="width:100%;margin-top: 10px"type="button" class="btn btn-info">Change Registration</button><br>
+        <button style="width:100%;margin-top: 10px"type="button" class="btn btn-warning">View Default Mess</button><br>
+      </div>
+  </div>
+
+
+<div style="float:left;width:50%;height:40%; padding: 0px 10px 0px 10px;border-radius: 10px">
+
+<b>Change Mess Registration Of A Student : </b><br><br>
+<button class="collapsible">Datewise Registration</button>
+<div class="content">
+  <br>
+  
+  Roll No : <input type="text" id="stud_roll" ><br>
+  Date : <input type="text" id="demo" ><br>
+  Mess : <select>
+            <option value="Yuktahar">Yuktahar</option>
+            <option value="Kadamb">Kadamb</option>
+            <option value="North">North</option>
+            <option value="South">South</option>
+         </select> <button style="float:right">Submit</button><br>
+  Meals :<input type="checkbox" name="meal_type_1" value="breakfast"> Breakfast
+         <input type="checkbox" name="meal_type_1" value="lunch"> Lunch
+         <input type="checkbox" name="meal_type_1" value="dinner"> Dinner<br>
+
+         
+  <br>
+</div>
+<br>
+<button class="collapsible">Monthly Registration</button>
+<div class="content">
+  <br>
+  Roll No : <input type="text" id="stud_roll" ><br>
+  Month : <select>
+            <option value="aug-2018">August-2018</option>
+            <option value="sep-2018">September-2018</option>
+            <option value="oct-2018">October-2018</option>
+            <option value="nov-2018">November-2018</option>
+            <option value="dec-2018">December-2018</option>
+            <option value="jan-2018">January-2019</option>
+            <option value="feb-2018">February-2019</option>
+            <option value="mar-2018">March-2019</option>
+            <option value="apr-2018">April-2019</option>
+            <option value="may-2018">May-2019</option>
+            <option value="jun-2018">June-2019</option>
+            <option value="jul-2018">July-2019</option>
+        </select> <br>
+  Mess : <select>
+            <option value="Yuktahar">Yuktahar</option>
+            <option value="Kadamb">Kadamb</option>
+            <option value="North">North</option>
+            <option value="South">South</option>
+         </select> <button style="float:right">Submit</button>
+         <button style="float:right">Unsubscribe Monthly</button><br>
+<br>
+</div>
+
+  
+
+</div>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+      
+  </div>
+</div>
+<br>
+<br><br>
+
+
+
+
+
+<script  src="/static/js/home.js"></script>
+
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+<script src="lightpick.js"></script>
+<script>
+    
+    new Lightpick({
+    field: document.getElementById('demo'),
+    lang: 'en',
+    numberOfMonths:2,
+    numberOfColumns: 3,
+    singleDate: false,
+    }
+);
+</script>
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+</script>

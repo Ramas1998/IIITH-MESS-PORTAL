@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Default Mess</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="lightpick.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 90%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+tr:hover {background-color:lightblue;}
+
+.modal-content
+{
+	background-color: white;
+	margin:5% auto auto auto;
+	border:1px solid #777;
+	width:100%;
+}
+
+
+</style>
+
+
+
+<body>
+{% include'header.html' %}
+<div>
+
+<div style="float:left;width:10%;height:40%; padding: 0px 10px 0px 10px;">
+    &nbsp;
+</div>
+
+
+<div style="float:left;width:80%;height:40%; padding: 0px 10px 0px 10px;border-radius: 10px">
+<center><h3><u>Student Database</u></h3><br></center>
+<center><a href="admin_dashboard.html">Click here Go Back !</a></center>
+<br>
+<div class=modal-content>
+	<center><br>
+		
+		<form method="post">
+			<input type="text"  name="filter" placeholder="Enter a string or leave blank">
+			&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn btn-primary" value="Apply Filter" formaction="populatelist" >
+		</form><br><br>
+
+<table id="student_table">
+
+<tr><th>Name</th><th>Roll No</th><th>Email Id</th><th>Breakfast Mess</th><th>Lunch Mess</th><th>Dinner Mess</th></tr>
+
+</table>    </center>  
+<br><br><Br>
+</div>
+</div>
+
+
+<div style="float:left;width:10%;height:40%; padding: 0px 10px 0px 10px;">
+      
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+</body>
+</html>
+<script>
+//function display()
+{
+	var data='{{data}}'
+	data=data.replace(/&#34;/g,'"')
+	data=JSON.parse(data)
+	var len=data.length
+
+	var table = document.getElementById('student_table');
+
+	for (var i = 0; i < len; i++)
+	{
+	var tr = document.createElement('tr');   
+	var td1 = document.createElement('td');
+	var td2 = document.createElement('td');
+	var td3 = document.createElement('td');
+	var td4 = document.createElement('td');
+	var td5 = document.createElement('td');
+	var td6 = document.createElement('td');
+
+
+	var text1 = document.createTextNode(data[i][0]);
+	var text2 = document.createTextNode(data[i][1]);
+	var text3 = document.createTextNode(data[i][2]);
+	var text4 = document.createTextNode(data[i][3]);
+	var text5 = document.createTextNode(data[i][4]);
+	var text6 = document.createTextNode(data[i][5]);
+
+	td1.appendChild(text1);
+	td2.appendChild(text2);
+	td3.appendChild(text3);
+	td4.appendChild(text4);
+	td5.appendChild(text5);
+	td6.appendChild(text6);
+	    
+	tr.appendChild(td1);
+	tr.appendChild(td2);
+	tr.appendChild(td3);
+	tr.appendChild(td4);
+	tr.appendChild(td5);
+	tr.appendChild(td6);
+	table.appendChild(tr);
+	}
+}
+
+
+</script>

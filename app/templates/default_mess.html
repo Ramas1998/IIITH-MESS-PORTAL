@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Default Mess</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="lightpick.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+ 
+<style>
+.table {
+    font-family: arial, sans-serif;
+    border: 5px;
+    width: 60%;
+    border-radius: 10px;
+}
+
+th
+{
+  background-color: #1abc9c;
+}
+
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    
+}
+</style>
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+<body onload="showpic()">
+
+{% include 'header.html'%}
+
+<div>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+    {% include 'left_sidebar.html'%}      
+  </div>
+
+
+<div style="float:left;width:50%;height:40%; padding: 0px 10px 0px 10px;border-radius: 10px">
+<br>
+<center><b> <h3>Default Mess</h3> </b></center><br>
+
+  <center>
+  <table class="table table-hover">
+  <tr><th>Meal</th><th>Mess</th></tr>   
+	<tr><td><b>Breakfast</b> </td><td id="breakfast_mess">{{mess1}}</td></tr> 
+  <tr><td><b>Lunch </b></td><td id="lunch_mess">{{mess2}}</td></tr>
+  <tr><td><b>Dinner </b></td><td id="dinner_mess">{{mess3}}</td></tr>
+</table>
+<br>
+
+  
+
+</div>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+      
+  </div>
+</div>
+<br>
+<br><br>
+
+</body>
+</html>

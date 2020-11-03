@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Default Mess</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="lightpick.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+ 
+<style>
+.collapsible {
+  background-color: #1abc9c;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #1abc9d;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+.btn
+{
+  margin-top: 5px;
+  width:30%;
+  height:3.5vw;
+}
+
+.modal-content
+{
+  background-color: white;
+  margin:5% auto auto auto;
+  border:1px solid #777;
+  width:80%;
+}
+
+
+
+</style>
+
+
+
+
+
+
+
+
+
+</head>
+
+<script>
+function check(a)
+{
+    if(a==1 || a==5)
+      document.getElementById("status_text").innerHTML="<b><font color='green'>Successfully Updated !</font></b>"
+}
+
+function alter()
+{
+  document.getElementById("newmenu").value =
+
+  document.getElementById("item1").value + " " + 
+  document.getElementById("item2").value + " " +
+  document.getElementById("item3").value + " " +
+  document.getElementById("item4").value + " " +
+  document.getElementById("item5").value
+
+  
+}
+
+</script>
+
+
+<body onload="check('{{status}}')">
+
+{%include 'header.html'%}
+<div>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+      &nbsp;
+  </div>
+
+
+  <div style="float:left;width:50%;height:40%; padding: 0px 10px 0px 10px;border-radius: 10px">
+  <center>
+  <b><h3><u>Change Mess Menu</u></h3></b>
+  <center><a href="admin_dashboard.html">Click here Go Back !</a></center>
+  <div class="modal-content" >
+      
+
+  
+  <form name="mess_menu" method="post">
+  <br><span id="status_text"></span>
+  <table>
+    <tr>
+
+    <td>Mess : </td> 
+  <td><select name="mess">
+    <option>yuktahar</option>
+    <option>kadamba</option>
+    <option>north</option>
+    <option>south</option>
+  </select></td></tr>
+  <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+
+  <tr><td>Day : </td> 
+  <td><select name="day">
+    <option>Sunday</option>
+    <option>Monday</option>
+    <option>Tuesday</option>
+    <option>Wednesday</option>
+    <option>Thursday</option>
+    <option>Friday</option>
+    <option>Saturday</option>
+  </select></td></tr>
+  <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr>
+    <td>
+  Meal : </td> 
+  <td><select name="meal">
+    <option>breakfast</option>
+    <option>lunch</option>
+    <option>dinner</option>
+  </select></td>
+  </tr>
+  <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr><td>Item 1 :</td><td><input type="text" id="item1" required></td></tr>
+  <tr><td>Item 2 :</td><td><input type="text" id="item2" ></td></tr>
+  <tr><td>Item 3 :</td><td><input type="text" id="item3" ></td></tr>
+  <tr><td>Item 4 :</td><td><input type="text" id="item4" ></td></tr>
+  <tr><td>Item 5 :</td><td><input type="text" id="item5" ></td></tr>
+  
+
+  <tr><td></td><td><button style="width:60%" class="btn btn-success" type="button" id="pokemon" onclick="alter()">Set Menu</button></td></tr>
+   
+  <tr><td>New Menu : </td><td><input placeholder="Do not write anything here" type="text" id="newmenu" name="newmenu" required readonly="true"></td></tr>
+
+
+
+
+
+</table>
+<br>
+  
+  <input class="btn btn-primary" formaction="/changemenu" type="submit" value="submit">
+</form>
+  
+  
+  <Br><br>
+  </div>
+  
+  
+</div>
+<br><Br>
+</center>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+      
+  </div>
+</div>
+</body>
+</html>

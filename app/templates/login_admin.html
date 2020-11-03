@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Homepage</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="lightpick.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script language="JavaScript">
+  /**
+    * Disable right-click of mouse, F12 key, and save key combinations on page
+    * By Arthur Gareginyan (arthurgareginyan@gmail.com)
+    * For full source code, visit https://mycyberuniverse.com
+    */
+  window.onload = function() {
+    document.addEventListener("contextmenu", function(e){
+      e.preventDefault();
+    }, false);
+    document.addEventListener("keydown", function(e) {
+    //document.onkeydown = function(e) {
+      // "I" key
+      if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+        disabledEvent(e);
+      }
+      // "J" key
+      if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+        disabledEvent(e);
+      }
+      // "S" key + macOS
+      if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+        disabledEvent(e);
+      }
+      // "U" key
+      if (e.ctrlKey && e.keyCode == 85) {
+        disabledEvent(e);
+      }
+      // "F12" key
+      if (event.keyCode == 123) {
+        disabledEvent(e);
+      }
+    }, false);
+    function disabledEvent(e){
+      if (e.stopPropagation){
+        e.stopPropagation();
+      } else if (window.event){
+        window.event.cancelBubble = true;
+      }
+      e.preventDefault();
+      return false;
+    }
+  };
+</script>
+<style>
+
+.mess_buttons
+{
+	position: fixed; bottom: 0;
+}
+
+.btn3d {
+	position: relative;
+	top: -6px;
+	border: 0;
+	transition: all 40ms linear;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 2px;
+	margin-right: 2px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 1.5vw;
+	border-radius: 10px;
+}
+
+.btn3d:active:focus,
+.btn3d:focus:hover,
+.btn3d:focus {
+	-moz-outline-style: none;
+	outline: medium none;
+}
+
+.btn3d:active,
+.btn3d.active {
+	top: 2px;
+}
+
+.btn3d.btn-white {
+	color: #666666;
+	box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255, 255, 255, 0.10) inset, 0 8px 0 0 #f5f5f5, 0 8px 8px 1px rgba(0, 0, 0, .2);
+	background-color: #fff;
+}
+
+.btn3d.btn-white:active,
+.btn3d.btn-white.active {
+	color: #666666;
+	box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, .1);
+	background-color: #fff;
+}
+
+.btn3d.btn-default {
+	color: #666666;
+	box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255, 255, 255, 0.10) inset, 0 8px 0 0 #BEBEBE, 0 8px 8px 1px rgba(0, 0, 0, .2);
+	background-color: #f9f9f9;
+}
+
+.btn3d.btn-default:active,
+.btn3d.btn-default.active {
+	color: #666666;
+	box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, .1);
+	background-color: #f9f9f9;
+}
+
+.btn3d.btn-primary {
+	box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #4D5BBE, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+	background-color: #4274D7;
+}
+
+.btn3d.btn-primary:active,
+.btn3d.btn-primary.active {
+	box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+	background-color: #4274D7;
+}
+
+.btn3d.btn-success {
+	box-shadow: 0 0 0 1px #31c300 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #5eb924, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+	background-color: #78d739;
+}
+
+.btn3d.btn-success:active,
+.btn3d.btn-success.active {
+	box-shadow: 0 0 0 1px #30cd00 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+	background-color: #78d739;
+}
+
+.btn3d.btn-info {
+	box-shadow: 0 0 0 1px #00a5c3 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #348FD2, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+	background-color: #39B3D7;
+}
+
+.btn3d.btn-info:active,
+.btn3d.btn-info.active {
+	box-shadow: 0 0 0 1px #00a5c3 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+	background-color: #39B3D7;
+}
+
+.btn3d.btn-warning {
+	box-shadow: 0 0 0 1px #d79a47 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #D79A34, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+	background-color: #FEAF20;
+}
+
+.btn3d.btn-warning:active,
+.btn3d.btn-warning.active {
+	box-shadow: 0 0 0 1px #d79a47 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+	background-color: #FEAF20;
+}
+
+.btn3d.btn-danger {
+	box-shadow: 0 0 0 1px #b93802 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #AA0000, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+	background-color: #D73814;
+}
+
+.btn3d.btn-danger:active,
+.btn3d.btn-danger.active {
+	box-shadow: 0 0 0 1px #b93802 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+	background-color: #D73814;
+}
+
+
+.modal-content
+{
+	background-color: white;
+	margin:13% auto auto auto;
+	border:1px solid #777;
+	width:25%;
+}
+.animate
+{
+	-webkit-animation:animatezoom 0.6s;
+	animation: animatezoom 0.6s;
+}
+
+@-webkit-keyframes animatezoom
+{
+	from { -webkit-transform:scale(0)}
+	to{ -webkit-transform:scale(1)}
+}
+@keyframes animatezoom
+{
+	from { transform:scale(0)}
+	to{ transform:scale(1)}
+}
+
+
+</style>
+<script>
+function check()
+{
+	var statusvar='{{status}}';
+	if(statusvar==1)
+	{
+		document.getElementById("status_text").innerHTML="Invalid Credentials."
+	}
+}
+
+</script>
+ 
+</head>
+<body onload="check()" style="background: url('static/login_background.jpg') no-repeat center center fixed;background-size: cover;">
+
+<center>
+<form action="/authenticate_admin" method="post" class="modal-content animate" style="">
+<img src="/static/iiit_logo.png"  style="width:50%;margin-top: 5%">
+<hr>
+<center>Admin Login</center>
+<hr>
+<span id="status_text" style="color:red"></span>
+<input id="email" name="email" style='margin-top: 2%;width:75%' type="email" placeholder="Email Address" required><br><br>
+<input id="password" name="password" style='width:75%' type="password" placeholder="Password" required><br><br>
+<input style='margin-bottom: 5%;'type="submit" value="Login">
+</form>
+</center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<center>
+<div class="mess_buttons" style="width:100%">
+<a href="static/uploads/yukta.pdf" target="_blank"><button type="button" style="width:18%" class="btn btn-danger btn3d">Yuktahar Menu <img src="static/veg.png" style="width:13%"></button></a>
+<a href="static/uploads/north.pdf" target="_blank"><button type="button" style="width:18%" class="btn btn-primary btn3d">North Menu <img src="static/veg.png" style="width:13%"></button></a>
+<a href="static/uploads/south.pdf" target="_blank"><button type="button" style="width:18%" class="btn btn-warning btn3d">South Menu <img src="static/veg.png" style="width:13%"></button></a>
+<a href="static/uploads/kadambveg.pdf" target="_blank"><button type="button" style="width:18%" class="btn btn-success btn3d">Kadamb Menu  <img src="static/veg.png" style="width:13%"></button></a>
+<a href="static/uploads/kadambnonveg.pdf" target="_blank"><button type="button" style="width:18%" class="btn btn-info btn3d">Kadamb Menu <img src="static/nonveg.png" style="width:13%"></button></a>
+</div>
+</center>
+
+</body>
+</html>

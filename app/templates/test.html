@@ -1,0 +1,21 @@
+<html>
+<body>
+
+<table border = 1 cellspacing=5 width=50% height=50px bgcolor="#ffff9f">
+        <tr>
+	    <th></td>
+            <th>Name</td>
+            <th>Phone</td>
+            <th>Interests</td>
+            <th>ID</td>
+	    <th>Marks</td>
+         </tr>
+         {% for row in rows%}
+            <tr>
+               <td> {{loop.index}}</td>
+               <td>{{row["roll_no"]}}</td>
+            </tr>
+         {% endfor %}
+      </table>
+</body>
+</html>

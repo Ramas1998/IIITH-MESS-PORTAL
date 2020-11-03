@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Default Mess</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="lightpick.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+
+.modal-content
+{
+  background-color: white;
+  margin:5% auto auto auto;
+  border:1px solid #777;
+  width:80%;
+}
+
+</style>
+
+
+
+<body>
+  {% include 'header.html' %}
+<div>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+      &nbsp;
+  </div>
+
+
+<div style="float:left;width:50%;height:40%; padding: 0px 10px 0px 10px;border-radius: 10px">
+
+<center><b> <h3><u>Set Your Default Mess</u></h3> </b><br>Choose wisely ! This cannot be undone.</center>
+		<br><br><center>
+		<div class="modal-content" >
+		<!------------------- --><br><Br>
+		<form action="/setdefaultmess" method="post">
+		<!------------------- -->
+
+		<table>	
+        <tr><td>Breakfast :</td><td> 
+        						<select name="default_breakfast_mess">
+        							<option name="Yuktahar">Yuktahar</option><option>North</option>
+        							<option>South</option><option>Kadamba</option>
+        						</select>
+        					</td></tr>
+        <tr><td>Lunch :</td><td>
+        					<select name="default_lunch_mess">
+        						<option>Yuktahar</option><option>North</option>
+        						<option>South</option><option>Kadamba</option>
+        					</select>
+        				</td></tr>
+        
+        <tr><td>Dinner :</td><td> 
+        					<select name="default_dinner_mess">
+        						<option>Yuktahar</option><option>North</option>
+        						<option>South</option><option>Kadamba</option>
+        					</select>
+        				</td></tr>
+        </table>
+        <br><br>
+        <input class="btn btn-primary" type="submit" value="Submit">
+        </form>
+        <br><br>
+      </div>
+    
+<br>
+
+  
+
+</div>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+     
+  </div>
+</div>
+<br>
+<br><br>
+
+
+
+
+
+<script  src="/static/js/home.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Homepage</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="static/lightpick.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+ 
+<style>
+.collapsible {
+  background-color: #1abc9c;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #1abc9d;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+</style>
+
+
+
+
+
+
+
+
+
+</head>
+<script>
+function check()
+{
+  var statusvar='{{status}}';
+  if(statusvar==2)
+  {
+    document.getElementById("status_text").innerHTML="Invalid Date(s)."
+  }
+  if(statusvar==3)
+  {
+    document.getElementById("status_text_2").innerHTML="Meals Cancelled Successfully."
+  }
+  if(statusvar==4)
+  {
+    document.getElementById("status_text_2").innerHTML="Meals Uncancelled Successfully."
+  }
+
+
+}
+
+</script>
+
+
+
+
+<body onload="showpic(),check()">
+
+{% include 'header.html'%}
+
+<div>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+    {% include 'left_sidebar.html'%}      
+  </div>
+
+
+<div style="float:left;width:50%;height:40%; padding: 0px 10px 0px 10px;border-radius: 10px">
+
+<b><br><br>Cancel Meals : </b><span id="status_text" style="color:red"></span><span id="status_text_2" style="color:green"></span> <br><br> 
+<!--<b>Cancellations Left : Breakfast - 5  Lunch - 5 Dinner - 5</b>-->
+<button class="collapsible">Datewise Cancellation</button>
+<div class="content" style="">
+  <br>
+  <form  method="post">
+  <center>
+  Date : <input type="text" id="demo" name="demo" required><br><br>
+  Meals : <input type="checkbox" id="meal_type_1" name="meal_type_1" value="breakfast" checked> Breakfast
+         <input type="checkbox" id="meal_type_2" name="meal_type_2" value="lunch"> Lunch
+         <input type="checkbox" id="meal_type_3" name="meal_type_3" value="dinner"> Dinner
+         <br><br>
+
+         <input class="btn btn-warning" type="submit" value="Cancel Meal" formaction="/cancelmealstatus"> <input class="btn btn-danger" type="submit" value="Uncancel Meal" formaction="/uncancelmealstatus"><br>
+  <br>
+</div>
+</form>
+  <br>
+<button class="collapsible">Daywise Cancellation</button>
+<div class="content">
+  <br>
+   <form  method="post">
+  <center>
+  Day : <select id="cancelday" name="cancelday">
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+        </select> <br><br>
+  Meals : <input type="checkbox" name="meal_type_1" value="breakfast" checked> Breakfast
+         <input type="checkbox" name="meal_type_2" value="lunch"> Lunch
+         <input type="checkbox" name="meal_type_3" value="dinner"> Dinner<br><br>
+
+        <input class="btn btn-warning" type="submit" value="Cancel Meal" formaction="/cancelmealdaywise"> <input class="btn btn-danger" type="submit" value="Uncancel Meal" formaction="/uncancelmealdaywise"><br> 
+
+  <br>
+</div>
+</form>
+<br>
+
+  
+
+</div>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+      
+  </div>
+</div>
+<br>
+<br><br>
+
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+<script src="static/lightpick.js"></script>
+<script>
+    
+    new Lightpick({
+    field: document.getElementById('demo'),
+    lang: 'en',
+    numberOfMonths:2,
+    numberOfColumns: 3,
+    singleDate: false,
+    }
+);
+</script>
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+</script>

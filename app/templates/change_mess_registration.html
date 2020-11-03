@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Homepage</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="static/lightpick.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+ 
+<style>
+.collapsible {
+  background-color: #1abc9c;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #1abc9c;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+</style>
+<script>
+function displayoptiondata(){
+	var select = document.getElementById("monthname");
+	var month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+	var date = new Date();
+    var current_month=date.getMonth();
+    var current_year=date.getFullYear();
+
+    for(var i =0; i <12; i++) {
+    var option = document.createElement('option');
+    current_month=current_month+1;
+    if(current_month>=12){
+    	current_year=current_year+1;
+    	current_month=0;
+    }
+    var mymonth=current_month+1;
+    option.text = month[current_month]+"-"+current_year;
+    option.value= mymonth+"/"+current_year;
+    select.add(option, i);
+      }
+}	
+function callonload(){
+	showpic();
+	displayoptiondata();
+}	
+
+</script>
+
+
+
+
+
+
+
+
+</head>
+<script>
+function check()
+{
+  var statusvar='{{status}}';
+  if(statusvar==2)
+  {
+    document.getElementById("status_text").innerHTML="Invalid Date(s)."
+  }
+  if(statusvar==7)
+  {
+    document.getElementById("status_text_2").innerHTML="Mess Registration Changed Successfully."
+  }
+    if(statusvar==15)
+  {
+    document.getElementById("status_text_2").innerHTML="Monthly Registered Successfully."
+  }
+      if(statusvar==16)
+  {
+    document.getElementById("status_text_2").innerHTML="Monthly Unregistered Successfully."
+  }
+  
+}
+
+</script>
+
+
+
+<body onload="callonload(),check()">
+
+{% include 'header.html'%}
+
+<div>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+    {% include 'left_sidebar.html'%}      
+  </div>
+
+<div style="float:left;width:50%;height:40%; padding: 0px 10px 0px 10px;border-radius: 10px">
+
+<b><br><br>Change Mess Registration : </b><span id="status_text" style="color:red"></span><span id="status_text_2" style="color:green"></span><br><br>
+<button class="collapsible">Datewise Registration</button>
+<div class="content">
+  <br>
+   <form  method="post">
+  
+   Date : <input type="text" id="demo" name="demo" required><br><br>
+  Mess : <select id="messname" name="messname">
+            <option value="Yuktahar">Yuktahar</option>
+            <option value="Kadamba">Kadamba</option>
+            <option value="North">North</option>
+            <option value="South">South</option>
+            <input class="btn btn-success" style="float:right" type="Submit" value="Submit" formaction="/datewisemesschange">
+        <!-- </select> <button class="btn btn-success" style="float:right">Submit</button><br><!-->
+  Meals :<input type="checkbox" name="meal_type_1" value="breakfast"> Breakfast
+         <input type="checkbox" name="meal_type_2" value="lunch"> Lunch
+         <input type="checkbox" name="meal_type_3" value="dinner"> Dinner<br>
+        
+  <br>
+</div>
+</form>
+  <br>
+	
+<a href="day_wise_gui.html"><button class="collapsible">Daywise Registration</button></a>
+<!-- <div class="content">
+  <br>
+  <form  method="post">
+  
+  Day : <select id="changeday" name="changeday">
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+        </select> <br>
+  Mess : <select id="messname1" name="messname1">
+            <option value="Yuktahar">Yuktahar</option>
+            <option value="Kadamba">Kadamba</option>
+            <option value="North">North</option>
+            <option value="South">South</option>
+         </select> <input class="btn btn-success" style="float:right" type="Submit" value="Submit" formaction="/daywisemesschange">
+  Meals :<input type="checkbox" name="meal_type_1" value="breakfast"> Breakfast
+         <input type="checkbox" name="meal_type_2" value="lunch"> Lunch
+         <input type="checkbox" name="meal_type_3" value="dinner"> Dinner<br>
+
+         
+  <br>
+</div> -->
+<br>
+	
+</form>
+<br>
+<button class="collapsible">Monthly Registration</button>
+<div class="content">
+  <br>
+  <form  method="post">
+  Month :  <select id="monthname" name="monthname"></select>
+ <br>
+  Mess : <select id="messname1" name="messname1">
+            <option value="Yuktahar">Yuktahar</option>
+            <option value="Kadamba">Kadamba</option>
+            <option value="North">North</option>
+            <option value="South">South</option>
+         </select> 
+         <input class="btn btn-danger" style="float:right" type="Submit" value="Unsubscribe Monthly" formaction="/monthlymessunsubscribe">
+         <input class="btn btn-success" style="margin-right:5px;float:right" type="Submit" value="Subscribe Monthly" formaction="/monthlymesssubscribe">
+<br>
+</div>
+</form>
+  
+
+</div>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+      
+  </div>
+</div>
+<br>
+<br><br>
+
+
+
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+<script src="static/lightpick.js"></script>
+<script>
+    
+    new Lightpick({
+    field: document.getElementById('demo'),
+    lang: 'en',
+    numberOfMonths:2,
+    numberOfColumns: 3,
+    singleDate: false,
+    }
+);
+</script>
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+</script>

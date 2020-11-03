@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Default Mess</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="lightpick.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+.btn
+{
+   background-color: #1abc9c;
+  margin-top: 5px;
+  width:50%;
+  height:3.5vw;
+}
+active, .btn:hover {
+  background-color: #3ee4c4
+}
+
+.modal-content
+{
+  background-color: white;
+  margin:5% auto auto auto;
+  border:1px solid #777;
+  width:60%;
+}
+
+</style>
+
+<script>
+function check()
+{
+  var svar='{{status}}'
+  if(svar==9)
+  {
+      document.getElementById("status_text").innerHTML="Bill Generated Successfully."
+  }
+
+
+}
+
+</script>
+
+
+
+<body onload="check()">
+     {% include 'header.html' %}
+<div>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+     .
+  </div>
+
+
+<div style="float:left;width:50%;height:40%; padding: 0px 10px 0px 10px;border-radius: 10px">
+
+<center><b> <h3><u>Generate Student Bill</u></h3> </b></center>
+    <center>
+    <div class="modal-content" >
+      <br><br>
+        <a href="/genbill" ><button class="btn btn-primary">Generate Bills !!</button> </a>
+      <br><br>
+      <center><span id="status_text" style="color:green"></span></center>
+
+      <br><br>
+    </div>
+<br>
+
+  
+
+</div>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+     
+  </div>
+</div>
+<br>
+<br><br>
+
+
+
+
+
+<script  src="/static/js/home.js"></script>
+
+</body>
+</html>

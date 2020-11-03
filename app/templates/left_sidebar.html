@@ -1,0 +1,32 @@
+<script>
+function showpic()
+{
+var t=document.getElementById('uname').innerHTML[0];
+document.getElementById('profile_pic').src="static/alphabets/"+t.toLowerCase()+".png";
+}
+showpic();
+</script>
+
+<br>
+      <center>
+      <h1>Welcome</h1>
+      <br>
+      <img id="profile_pic" src="" width="85px" height="85px"><br>
+      <span id="uname">{{session['name']}}</span><br>
+      <span id="roll">{{session['roll_no']}}</span><br><br>
+    </center>
+      <div style=" height:100%;">
+        
+        <a href="dashboard.html"><button  style="width:100%;margin-top: 0px" type="button" class="btn btn-primary">View Mess Registration</button></a><br>
+        <a href="/cancelmeals.html"><button style="width:100%;margin-top: 10px"type="button" class="btn btn-success" ">Cancel Meals</button> </a><br>
+        
+        <a href="change_mess_registration.html"><button style="width:100%;margin-top: 10px"type="button" class="btn btn-info">Change Mess Registration</button></a><br>
+
+        <a href="/getdefaultmess"><button style="width:100%;margin-top: 10px"type="button" class="btn btn-warning">View Default Mess</button></a><br>
+      </div>
+
+        <!-- <a href="default_mess.html"><button style="width:100%;margin-top: 10px"type="button" class="btn btn-warning">View Default Mess</button></a><br> -->
+        <a href="/bill"><button style="width:100%;margin-top: 10px"type="button" class="btn btn-success" ">Show Bill</button><br></a>
+        <a href="/feedback.html"><button style="width:100%;margin-top: 10px"type="button" class="btn btn-primary" ">Submit Feedback</button><br></a>
+      </div>
+

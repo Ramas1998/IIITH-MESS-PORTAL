@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+  <title>Feedback</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    width: 80%;
+    text-align: left;
+}
+
+
+.collapsible {
+  background-color: #1abc9c;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #1abc9d;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+
+.bgimg
+        {
+            position:relative;
+            bottom :0px;
+            max-width: 8000px;
+            width:100%;
+            height: 50%px;
+            background-color: rgb(245,255,250);
+            background: rgb(0, 0, 0); /* Fallback color */
+            background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+            color: #f1f1f1; /* Grey text */
+            padding: 10px; /* Some padding */
+        }
+
+</style>
+</head>
+<body onload="show()">
+
+<center><h2>Following Feedbacks have been Received</h2></center>
+<center>
+<div class="container">
+<center>
+<div class="bgimg" id="result"></div>
+  </center>
+  </div>
+</center>
+</body>
+</html>
+
+<script>
+function show()
+{ 
+  var feedback = '{{feedback}}';
+  feedback = feedback.replace(/&#34;/g,'"');
+  feedback = JSON.parse(feedback);
+  var len=0;
+  while(feedback[len])
+  {
+      len++;
+  }
+  
+  document.getElementById("result").innerHTML = "" ;
+  
+  
+
+
+  for(var i=0;i<len;i++)
+  { resp=feedback[i];
+    var node = document.createElement("li");
+    node.style.cssText = "font-size : 25;";
+    node.innerHTML = "Roll No : "+ resp[0].toString() +"<br>" + "Name : "+ resp[1].toString() +"<br>" + "Mess : "+ resp[2].toString() +"<br>" + "Response : "+ resp[3].toString();
+    document.getElementById("result").appendChild(node);
+    if(resp[4].toString() != "")
+    {  
+      var x = document.createElement("img");
+      x.setAttribute("src", "static/Images/"+resp[4].toString());
+      x.setAttribute("width", "304");
+      x.setAttribute("height", "228");
+      document.getElementById("result").appendChild(x);
+    }
+  }
+}
+</script>

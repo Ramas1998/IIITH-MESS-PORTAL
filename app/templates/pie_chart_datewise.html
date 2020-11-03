@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Default Mess</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="lightpick.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src="http://www.chartjs.org/dist/2.7.3/Chart.bundle.js"></script>
+	<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+  <style>
+canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+.collapsible 
+{
+  background-color: #1abc9c;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #1abc9c;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+</style>
+
+</head>
+
+
+
+
+<body onload="helper()">
+{% include'header.html' %}
+<div>
+<center><h3><b>Datewise PieChart Viewer</b></h3><center><br>
+	<center><form method="POST">
+		Select A Date : <input type="date" name="pie_date" required>
+		<button formaction="/datewise_piechart">Go</button>
+	</form>
+	</center>
+<div style="float:left;width:33%;height:40%; padding: 0px 10px 0px 10px;">
+<Br><br><br><br>
+<div id="canvas-holder" >
+		<canvas id="breakfast_area_1"></canvas>
+</div>
+<center>Breakfast Registration Data <br> ({{date}})</center>
+</div>
+
+
+<div style="float:left;width:33%;height:40%; padding: 0px 10px 0px 10px;border-radius: 10px">
+
+
+
+<div>
+	<br><br>
+	<br><br>
+<center>
+
+		<div id="canvas-holder" >
+		<canvas id="lunch_area_1"></canvas>
+		</div>
+		
+</center>
+<center>Lunch Registration Data <br> ({{date}})</center>
+	
+
+</div><br>
+
+
+
+
+
+
+
+</div>
+
+
+<div style="float:left;width:33%;height:40%; padding: 0px 10px 0px 10px;">
+      <Br><br><br><br>
+      <div id="canvas-holder">
+		<canvas id="dinner_area_1"></canvas>
+	</div>
+	<center>Dinner Registration Data <br> ({{date}})</center>
+
+</div>
+
+
+</div>
+</body>
+</html>
+
+
+
+
+
+
+<script>
+function helper()
+{
+	console.log("Im here")
+	var bdata='{{bdata}}'
+	var ldata='{{ldata}}'
+	var ddata='{{ddata}}'
+
+	bdata=bdata.replace(/&#34;/g,'"')
+	ldata=ldata.replace(/&#34;/g,'"')
+	ddata=ddata.replace(/&#34;/g,'"')
+
+	bdata=JSON.parse(bdata)
+	ldata=JSON.parse(ldata)
+	ddata=JSON.parse(ddata)
+
+	plot(bdata["Yuktahar"],bdata["Kadamba"],bdata["North"],bdata["South"],'breakfast')
+	plot(ldata["Yuktahar"],ldata["Kadamba"],ldata["North"],ldata["South"],'lunch')
+	plot(ddata["Yuktahar"],ddata["Kadamba"],ddata["North"],ddata["South"],'dinner')
+
+
+}
+
+
+
+function plot(a,b,c,d,meal)
+{
+	console.log("Im also here")
+	if(!a)
+		a=0
+	if(!b)
+		b=0
+	if(!c)
+		c=0
+	if(!d)
+		d=0
+
+	var breakfast = document.getElementById(meal+"_pie_1");
+	
+	Chart.defaults.global.defaultFontFamily = "Lato";
+	Chart.defaults.global.defaultFontSize = 13;
+
+	var messData = {
+	    labels: [
+	        "Yuktahar",
+	        "Kadamb",
+	        "North",
+	        "South",
+	    ],
+	    datasets: [
+	        {
+	            data: [a, b, c, d],
+	            backgroundColor: [
+	                "#FF6384",
+	                "#63FF84",
+	                "#84FF63",
+	                "#8463FF"
+	            ],
+	            borderColor: "black",
+	            borderWidth: 1
+	        }]
+	};
+
+	var chartOptions = {
+	  rotation: -Math.PI,
+	  cutoutPercentage: 50,
+	  circumference: Math.PI,
+	  legend: {
+	    position: 'left'
+	  },
+	  animation: {
+	    animateRotate: true,
+	    animateScale: true
+	  }
+	};
+
+	var pieChart = new Chart(meal+"_area_1", {
+	  type: 'doughnut',
+	  data: messData,
+	  options: chartOptions
+	});
+}
+</script>

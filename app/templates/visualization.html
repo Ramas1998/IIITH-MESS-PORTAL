@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Default Mess</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="lightpick.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src="http://www.chartjs.org/dist/2.7.3/Chart.bundle.js"></script>
+	<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+  <style>
+
+.collapsible 
+{
+  background-color: #1abc9c;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 60%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #1abc9c;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+.modal-content
+{
+  background-color: white;
+  margin:5% auto auto auto;
+  border:1px solid #777;
+  width:80%;
+}
+</style>
+
+</head>
+
+
+
+
+<body onload="helper()">
+{% include'header.html' %}
+<div>
+
+<div style="float:left;width:10%;height:40%; padding: 0px 10px 0px 10px;">
+    &nbsp;
+</div>
+
+
+<div style="float:left;width:80%;height:40%; padding: 0px 10px 0px 10px;border-radius: 10px">
+
+<center><b> <h3><u>Visualize Mess Registrations</u></h3> </b></center>
+<center><a href="admin_dashboard.html">Click here Go Back !</a></center>
+<br>
+<center>
+<div class="modal-content" >
+	<br><Br>
+<button class="collapsible">Datewise Pie Chart</button>
+<div class="content">
+	<br>
+	<center><form method="POST">
+		Select A Date : <input type="date" name="pie_date" required>
+		<button formaction="/datewise_piechart">Go</button>
+	</form>
+	</center>
+	<br><br>
+</div><br>
+
+
+
+
+
+<button class="collapsible">Monthwise Pie Chart</button>
+<div class="content">
+<br><center><form method="POST">
+		Select A Month :<select name="pie_month">
+			<option value="1">January</option>
+			<option value="2">February</option>
+			<option value="3">March</option>
+			<option value="4">April</option>
+			<option value="5">May</option>
+			<option value="6">June</option>
+			<option value="7">July</option>
+			<option value="8">August</option>
+			<option value="9">September</option>
+			<option value="10">October</option>
+			<option value="11">November</option>
+			<option value="12">December</option>
+		</select>
+		<button formaction="/monthwise_piechart">Go</button>
+	</form>
+	</center>
+	<br><br>
+</div><br>
+</div>
+
+
+
+
+<!-- <button class="collapsible">Daywise Line Graph</button>
+<div class="content">
+	<br>
+	<center><form method="POST">
+		Select A Date : 
+		<select name="line_day">
+			<option value="Monday">Monday</option>
+			<option value="Tuesday">Tuesday</option>
+			<option value="Wednesday">Wednesday</option>
+			<option value="Thursday">Thursday</option>
+			<option value="Friday">Friday</option>
+			<option value="Saturday">Saturday</option>
+			<option value="Sunday">Sunday</option>
+		</select>
+		<button formaction="/daywise_linechart">Go</button>
+	</form>
+	</center>
+	<br><br>
+</div><br>
+
+
+
+
+
+
+<button class="collapsible">Monthwise Line Graph</button>
+<div class="content">
+<br><center><form method="POST">
+		Select A Month :<select name="line_month">
+			<option value="1">January</option>
+			<option value="2">February</option>
+			<option value="3">March</option>
+			<option value="4">April</option>
+			<option value="5">May</option>
+			<option value="6">June</option>
+			<option value="7">July</option>
+			<option value="8">August</option>
+			<option value="9">September</option>
+			<option value="10">October</option>
+			<option value="11">November</option>
+			<option value="12">December</option>
+		</select>
+		<button formaction="/monthwise_linechart">Go</button>
+	</form>
+	</center>
+	<br><br>
+</div><br>
+ -->
+
+</div><br>
+
+
+<div style="float:left;width:10%;height:40%; padding: 0px 10px 0px 10px;">
+      
+
+</div>
+
+
+</div>
+</body>
+</html>
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+
+
+
+<script>
+function helper()
+{
+
+
+	var bdata='{{bdata}}'
+	var ldata='{{ldata}}'
+	var ddata='{{ddata}}'
+
+	bdata=bdata.replace(/&#34;/g,'"')
+	ldata=ldata.replace(/&#34;/g,'"')
+	ddata=ddata.replace(/&#34;/g,'"')
+
+	bdata=JSON.parse(bdata)
+	ldata=JSON.parse(ldata)
+	ddata=JSON.parse(ddata)
+
+
+	plot(bdata["Yuktahar"],bdata["Kadamba"],bdata["North"],bdata["South"])
+}
+
+
+
+function plot(a,b,c,d)
+{
+	if(!a)
+		a=0
+	if(!b)
+		b=0
+	if(!c)
+		c=0
+	if(!d)
+		d=0
+
+	var breakfast = document.getElementById("breakfast_pie_1");
+	var lunch = document.getElementById("lunch_pie_1");
+	var dinner = document.getElementById("dinner_pie_1");
+
+	Chart.defaults.global.defaultFontFamily = "Lato";
+	Chart.defaults.global.defaultFontSize = 18;
+
+	var messData = {
+	    labels: [
+	        "Yuktahar",
+	        "Kadamb",
+	        "North",
+	        "South",
+	    ],
+	    datasets: [
+	        {
+	            data: [a, b, c, d],
+	            backgroundColor: [
+	                "#FF6384",
+	                "#63FF84",
+	                "#84FF63",
+	                "#8463FF"
+	            ],
+	            borderColor: "black",
+	            borderWidth: 2
+	        }]
+	};
+
+	var chartOptions = {
+	  rotation: -Math.PI,
+	  cutoutPercentage: 30,
+	  circumference: Math.PI,
+	  legend: {
+	    position: 'left'
+	  },
+	  animation: {
+	    animateRotate: true,
+	    animateScale: true
+	  }
+	};
+
+	var pieChart = new Chart(breakfast-area-1, {
+	  type: 'doughnut',
+	  data: messData,
+	  options: chartOptions
+	});
+}
+</script>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Homepage</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script>
+    var date = new Date();
+    var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+
+  </script>
+
+
+
+
+
+
+
+
+
+</head>
+<style type="text/css">
+  .w3-center {
+      text-align: center!important;
+      padding: 10px;
+  }
+  .w3-card-4, .w3-hover-shadow:hover {
+      padding: 10px;
+  }
+* {box-sizing: border-box;}
+ul {list-style-type: none;}
+body {font-family: Verdana, sans-serif; background-image: url('bhakt.jpg');}
+
+.month {
+    padding: 25px 25px;
+    width: 100%;
+    background: #1abc9c;
+    text-align: center;
+}
+
+.month ul {
+    margin: 0;
+    padding: 0;
+}
+
+.month ul li {
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.month .prev {
+    float: left;
+    padding-top: 10px;
+}
+
+.month .next {
+    float: right;
+    padding-top: 10px;
+}
+
+.weekdays {
+    margin: 0;
+    padding: 10px 0;
+    background-color: #ddd;
+}
+
+.weekdays li {
+    display: inline-block;
+    width: 13.6%;
+    color: #666;
+    text-align: center;
+}
+
+.days {
+    padding: 10px 0;
+    background: #eee;
+    margin: 0;
+}
+
+.days li {
+    list-style-type: none;
+    display: inline-block;
+    width: 13.6%;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size:12px;
+    color: #777;
+}
+
+.days li .active {
+    padding: 5px;
+    background: #1abc9c;
+    color: white !important
+}
+
+/* Add media queries for smaller screens */
+@media screen and (max-width:720px) {
+    .weekdays li, .days li {width: 13.1%;}
+}
+
+@media screen and (max-width: 420px) {
+    .weekdays li, .days li {width: 12.5%;}
+    .days li .active {padding: 2px;}
+}
+
+@media screen and (max-width: 290px) {
+    .weekdays li, .days li {width: 12.2%;}
+}
+
+
+</style>
+
+<script>
+    //----------
+    var date = new Date();
+    var current_month=date.getMonth();
+    var current_year=date.getFullYear();
+    
+    var firstDay = new Date(current_year, current_month, 1);
+    var lastDay = new Date(current_year, current_month + 1, 0);
+
+    var daysToSkip=firstDay.getDay();
+    var month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+    
+
+    function show_month_year()
+    {
+        var n =month[current_month];
+        document.getElementById("cur_month").innerHTML=n;
+        document.getElementById("cur_year").innerHTML=current_year;
+    }
+
+    function increment_month()
+    {
+    
+        var ul = document.getElementsByClassName("days");
+        while(ul[0].firstChild) ul[0].removeChild(ul[0].firstChild);
+
+
+        if(current_month==11)
+            current_year+=1;    
+        current_month=(current_month+1)%12;
+        firstDay = new Date(current_year, current_month, 1);
+        lastDay = new Date(current_year, current_month + 1, 0);        
+        function1();
+    }
+    function decrement_month()
+    {
+    
+        var ul = document.getElementsByClassName("days");
+        while(ul[0].firstChild) ul[0].removeChild(ul[0].firstChild);
+
+
+        if(current_month==0)
+            current_year-=1;    
+        current_month=(current_month-1+12)%12;
+        firstDay = new Date(current_year, current_month, 1);
+        lastDay = new Date(current_year, current_month + 1, 0);        
+        function1();
+    }
+
+
+
+    function function1() 
+    {
+        
+        show_month_year();
+        var ul = document.getElementsByClassName("days");
+        var month_label=document.getElementById("cur_month");
+        var year_label=document.getElementById("cur_year");
+        var daysToSkip=firstDay.getDay();
+        var daysToPrint=lastDay.getDate();
+
+
+        
+        for(i=0;i<daysToSkip;i++)
+        {
+            var li = document.createElement("li");
+          li.appendChild(document.createTextNode(""));
+          ul[0].appendChild(li);
+        }
+        for(i=0;i<daysToPrint;i++)
+        {
+          j=i+1;
+            var li = document.createElement("li");
+          li.appendChild(document.createTextNode(j.toString()+"\n"));
+          ul[0].appendChild(li);
+        }
+        
+  }
+    
+    
+    
+    
+  </script>
+
+<body onload="function1()">
+
+<nav class="navbar" style="background:#1abc9c ;color:white;">
+  <div class="container-fluid" >
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Home</a>
+    </div>  
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Cancel Next Meal</a>
+    </div>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span id="username" class="glyphicon glyphicon-user"></span></a></li>
+      <li><a id="btnLogout" href="../"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+<div>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+      <br>
+      <div style=" height:100%;">
+        
+        <button  style="width:100%;margin-top: 0px" type="button" class="btn btn-primary">View Mess Registration</button><br>
+        <button style="width:100%;margin-top: 10px"type="button" class="btn btn-success">Cancel Meals</button><br>
+        <button style="width:100%;margin-top: 10px"type="button" class="btn btn-info">Change Registration</button><br>
+        <button style="width:100%;margin-top: 10px"type="button" class="btn btn-warning">View Default Mess</button><br>
+      </div>
+  </div>
+
+
+<div style="float:left;width:50%;height:40%; padding: 0px 10px 0px 10px;border-radius: 10px">
+<br>  
+  <div class="month">      
+  <ul>
+    <li class="prev"><button style="background:none;" onclick="decrement_month();">&#10094;</button></li>
+    <li class="next"><button style="background:none;" onclick="increment_month();">&#10095;</button></li>
+     <li id="cur_month">
+      </li>
+     <li id="cur_year">
+    </li>
+  </ul>
+</div>
+
+<ul class="weekdays">
+  <li>Mo</li>
+  <li>Tu</li>
+  <li>We</li>
+  <li>Th</li>
+  <li>Fr</li>
+  <li>Sa</li>
+  <li>Su</li>
+</ul>
+
+<ul class="days">  
+</ul>
+
+</div>
+  <div style="float:left;width:25%;height:40%; padding: 0px 10px 0px 10px;">
+      <center>Next Three Meals<br>
+      <div style="background-color: #1abc9c;margin-bottom:10px;padding-top:7px;color:white;border-radius: 10px">
+        Breakfast:NORTH<br>
+        <button type="button" class="btn btn-warning" style="margin-bottom: 10px;height:30px;margin-top:7px; ">Menu</button>
+        <button type="button" class="btn btn-danger" style="margin-bottom: 10px;height:30px;margin-top:7px; ">Cancel</button>
+      </div>
+      <div style="background-color: #1abc9c;margin-bottom:10px;padding-top:7px;color:white;border-radius: 10px ">
+        Lunch:NORTH<br>
+        <button type="button" class="btn btn-warning" style="margin-bottom: 10px;height:30px;margin-top:7px; ">Menu</button>
+        <button type="button" class="btn btn-danger" style="margin-bottom: 10px;height:30px;margin-top:7px;">Cancel</button>
+      </div>
+      <div style="background-color: #1abc9c;margin-bottom:10px;padding-top:7px;color:white;border-radius: 10px ">
+        Dinner:NORTH<br>
+        <button type="button" class="btn btn-warning" style="margin-bottom: 10px;height:30px;margin-top:7px; ">Menu</button>
+        <button type="button" class="btn btn-danger" style="margin-bottom: 10px;height:30px;margin-top:7px;">Cancel</button>
+        
+      </div>
+
+    </center>
+  </div>
+</div>
+<br>
+<br><br>
+
+
+
+
+
+<script  src="/static/js/home.js"></script>
+</body>
+</html>

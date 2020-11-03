@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Default Mess</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="lightpick.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  #cell
+  {
+
+    border: 1px solid red;
+    margin-left: 3px;
+    margin-top: 3px;
+    padding:2px;
+  }
+
+
+  </style>
+
+
+  <script>
+    function display()
+    {
+    var jsondata='{{message}}'
+    jsondata=jsondata.replace(/&#34;/g,"\"")
+    var parsedData=JSON.parse(jsondata)
+    var breakfast=parsedData["breakfast_list"]
+    var lunch=parsedData["lunch_list"]
+    var dinner=parsedData["dinner_list"]
+
+    bstring=""
+    for(i=0;i<breakfast.length;i++)
+    {
+      if(i%6==0)
+        bstring+="<br><br>"
+      bstring+="<span id='cell'>"+breakfast[i]+"</span>";
+      
+    }
+    document.getElementById("total_b").innerHTML=i;
+    lstring=""
+    for(i=0;i<lunch.length;i++)
+    {
+      if(i%6==0)
+        lstring+="<br><br>"
+      lstring+="<span id='cell'>"+lunch[i]+"</span>";
+    }
+    document.getElementById("total_l").innerHTML=i;
+    dstring=""
+    for(i=0;i<dinner.length;i++)
+    {
+      if(i%6==0)
+        dstring+="<br><br>"
+      dstring+="<span id='cell'>"+dinner[i]+"</span>";
+    }
+    document.getElementById("total_d").innerHTML=i;
+    document.getElementById("breakfast_field").innerHTML=bstring;
+    document.getElementById("lunch_field").innerHTML=lstring;
+    document.getElementById("dinner_field").innerHTML=dstring;
+    document.getElementById("mess_name").innerHTML=parsedData['mess'];
+    document.getElementById("date").innerHTML=parsedData['date'];
+        
+
+    }
+
+
+    function printer()
+    {
+      document.getElementById("cur_time").innerHTML =new Date().toLocaleString();
+      window.print()
+    }
+  </script> 
+
+
+
+
+
+</head>
+<body onload="display()">
+
+
+
+
+<center>
+  <hr>
+<h3>Mess Registrations</h3>
+<u><h4 id="mess_name"></h4></u>
+<u><h5 id="date"></h5></u>
+<button class="btn btn-primary" onclick="printer()">Print</button> <button class="btn btn-warning" onclick="history.go(-1);">Go back</button><br>
+Document Printed At :<span id="cur_time"></span>
+
+<hr>
+<b><u>Breakfast</u></b>
+<span id="breakfast_field"></span><br>Total Registered Students :<span id="total_b"></span><br><br>
+<hr>
+<b><u>Lunch</u></b>
+<span id="lunch_field"></span><br>Total Registered Students :<span id="total_l"></span><br><br>
+<hr>
+<b><u>Dinner</u></b>
+<span id="dinner_field"></span><br>Total Registered Students :<span id="total_d"></span><br><br>
+<hr>
+</center>
+<br>
+<br><br>
+
+
+
+
+
+<script  src="/static/js/home.js"></script>
+
+</body>
+</html>
